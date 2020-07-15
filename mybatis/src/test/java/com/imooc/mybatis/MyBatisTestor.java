@@ -1,5 +1,7 @@
 package com.imooc.mybatis;
 
+import com.imooc.mybatis.entity.Goods;
+import com.imooc.mybatis.utils.MyBatisUtils;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -10,11 +12,12 @@ import java.io.IOException;
 import java.io.Reader;
 import java.net.ConnectException;
 import java.sql.Connection;
+import java.util.List;
 
 //单元测试类
 public class MyBatisTestor {
     @Test
-    public void testSqlSessionFactory() throws IOException {
+    public void testSqlSessionFactory() throws Exception {
         //利用Reader加载classpath下的mybatis-config.xml核心配置文件
         Reader reader = Resources.getResourceAsReader("mybatis-config.xml");
         //初始化SqlSessionFactory对象，同时解析mybatis-config.xml文件
@@ -39,6 +42,20 @@ public class MyBatisTestor {
                 sqlSession.close();
             }
         }
-
+    }
+    @Test
+    public void testSelectAll() throws Exception{
+        SqlSession sqlSession = null;
+        try{
+            sqlSession = MyBatisUtils.openSession();
+            List<Goods> list = sqlSession.selectList("goods.selectAll");
+            for(Goods g : list){
+                System.out.println(g.getTitle());
+            }
+        }catch (Exception e){
+            throw e;
+        }finally {
+            MyBatisUtils.closeSession(sqlSession);
+        }
     }
 }
