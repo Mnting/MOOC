@@ -12,7 +12,9 @@ import java.io.IOException;
 import java.io.Reader;
 import java.net.ConnectException;
 import java.sql.Connection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 //单元测试类
 public class MyBatisTestor {
@@ -66,6 +68,26 @@ public class MyBatisTestor {
             sqlSession = MyBatisUtils.openSession();
             Goods good = sqlSession.selectOne("goods.selectById",1602);
             System.out.println(good.getTitle());
+        }catch (Exception e){
+            throw e;
+        }finally {
+            MyBatisUtils.closeSession(sqlSession);
+        }
+    }
+
+    @Test
+    public void  () throws Exception{
+        SqlSession sqlSession = null;
+        try{
+            sqlSession = MyBatisUtils.openSession();
+            Map param = new HashMap();
+            param.put("min",100);
+            param.put("max",500);
+            param.put("limit",10);
+            List<Goods> list = sqlSession.selectList("selectByPriceRange",param);
+            for(Goods g:list) {
+                System.out.println(g.getTitle()+":"+g.getCurrentPrice());
+            }
         }catch (Exception e){
             throw e;
         }finally {
