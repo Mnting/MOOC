@@ -76,7 +76,7 @@ public class MyBatisTestor {
     }
 
     @Test
-    public void  () throws Exception{
+    public void selectByPriceRange () throws Exception{
         SqlSession sqlSession = null;
         try{
             sqlSession = MyBatisUtils.openSession();
@@ -87,6 +87,37 @@ public class MyBatisTestor {
             List<Goods> list = sqlSession.selectList("selectByPriceRange",param);
             for(Goods g:list) {
                 System.out.println(g.getTitle()+":"+g.getCurrentPrice());
+            }
+        }catch (Exception e){
+            throw e;
+        }finally {
+            MyBatisUtils.closeSession(sqlSession);
+        }
+    }
+
+    @Test
+    public void selectGoodsMapOrder () throws Exception{
+        SqlSession sqlSession = null;
+        try{
+            sqlSession = MyBatisUtils.openSession();
+            List<Map> list = sqlSession.selectList("goods.selectGoodsMapOrder");
+            for(Map map:list) {
+                System.out.println(map);
+            }
+        }catch (Exception e){
+            throw e;
+        }finally {
+            MyBatisUtils.closeSession(sqlSession);
+        }
+    }
+    @Test
+    public void selectGoodsMapUnordered () throws Exception{
+        SqlSession sqlSession = null;
+        try{
+            sqlSession = MyBatisUtils.openSession();
+            List<Map> list = sqlSession.selectList("goods.selectGoodsMapUnordered");
+            for(Map map:list) {
+                System.out.println(map);
             }
         }catch (Exception e){
             throw e;
