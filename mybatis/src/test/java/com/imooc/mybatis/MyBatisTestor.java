@@ -1,5 +1,6 @@
 package com.imooc.mybatis;
 
+import com.imooc.mybatis.dto.GoodsDTO;
 import com.imooc.mybatis.entity.Goods;
 import com.imooc.mybatis.utils.MyBatisUtils;
 import org.apache.ibatis.io.Resources;
@@ -121,6 +122,49 @@ public class MyBatisTestor {
             }
         }catch (Exception e){
             throw e;
+        }finally {
+            MyBatisUtils.closeSession(sqlSession);
+        }
+    }
+
+    @Test
+        public void selectGoodsDTO () throws Exception{
+        SqlSession sqlSession = null;
+        try{
+            sqlSession = MyBatisUtils.openSession();
+            List<GoodsDTO> list = sqlSession.selectList("goods.selectGoodsDTO");
+            for(GoodsDTO goodsDTO:list) {
+                System.out.println(goodsDTO.getGoods().getTitle());
+            }
+        }catch (Exception e){
+            throw e;
+        }finally {
+            MyBatisUtils.closeSession(sqlSession);
+        }
+    }
+
+    @Test
+    public void testInsert () throws Exception{
+        SqlSession sqlSession = null;
+        try{
+            sqlSession = MyBatisUtils.openSession();
+            Goods goods = new Goods();
+            goods.setTitle("测试商品");
+            goods.setSubTitle("测试子标题");
+            goods.setOriginalCost(200f);
+            goods.setIsFreeDelivery(1);
+            goods.setCategoryId(43);
+            goods.setDiscount(0.5f);
+            goods.setCurrentPrice(100f);
+            //insert()方法返回值代表本次成功插入的记录数
+            int sum = sqlSession.insert("goods.insert",goods);
+            sqlSession.commit();//提交事务数据
+            System.out.println(sum);
+            System.out.println(goods.getGoodsId());
+        }catch (Exception e){
+            if(sqlSession != null){
+                sqlSession.rollback();//回滚事务
+            }
         }finally {
             MyBatisUtils.closeSession(sqlSession);
         }
