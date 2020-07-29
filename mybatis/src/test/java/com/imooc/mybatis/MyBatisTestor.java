@@ -77,7 +77,7 @@ public class MyBatisTestor {
     }
 
     @Test
-    public void selectByPriceRange () throws Exception{
+    public void testSelectByPriceRange () throws Exception{
         SqlSession sqlSession = null;
         try{
             sqlSession = MyBatisUtils.openSession();
@@ -97,7 +97,7 @@ public class MyBatisTestor {
     }
 
     @Test
-    public void selectGoodsMapOrder () throws Exception{
+    public void testSelectGoodsMapOrder () throws Exception{
         SqlSession sqlSession = null;
         try{
             sqlSession = MyBatisUtils.openSession();
@@ -112,7 +112,7 @@ public class MyBatisTestor {
         }
     }
     @Test
-    public void selectGoodsMapUnordered () throws Exception{
+    public void testSelectGoodsMapUnordered () throws Exception{
         SqlSession sqlSession = null;
         try{
             sqlSession = MyBatisUtils.openSession();
@@ -128,7 +128,7 @@ public class MyBatisTestor {
     }
 
     @Test
-        public void selectGoodsDTO () throws Exception{
+        public void testSelectGoodsDTO () throws Exception{
         SqlSession sqlSession = null;
         try{
             sqlSession = MyBatisUtils.openSession();
@@ -161,6 +161,40 @@ public class MyBatisTestor {
             sqlSession.commit();//提交事务数据
             System.out.println(sum);
             System.out.println(goods.getGoodsId());
+        }catch (Exception e){
+            if(sqlSession != null){
+                sqlSession.rollback();//回滚事务
+            }
+        }finally {
+            MyBatisUtils.closeSession(sqlSession);
+        }
+    }
+
+    @Test
+    public void testUpdate () throws Exception{
+        SqlSession sqlSession = null;
+        try{
+            sqlSession = MyBatisUtils.openSession();
+            Goods goods = sqlSession.selectOne("goods.selectById",739);
+            goods.setTitle("更新测试商品");
+            sqlSession.update("goods.update",goods);
+            sqlSession.commit();
+        }catch (Exception e){
+            if(sqlSession != null){
+                sqlSession.rollback();//回滚事务
+            }
+        }finally {
+            MyBatisUtils.closeSession(sqlSession);
+        }
+    }
+
+    @Test
+    public void testDelete () throws Exception{
+        SqlSession sqlSession = null;
+        try{
+            sqlSession = MyBatisUtils.openSession();
+            int sum = sqlSession.delete("goods.delete",739);
+            sqlSession.commit();
         }catch (Exception e){
             if(sqlSession != null){
                 sqlSession.rollback();//回滚事务
