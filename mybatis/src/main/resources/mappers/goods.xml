@@ -67,29 +67,15 @@
         </selectKey>
     </insert>
 
-    <insert id="insert_ugk" parameterType="com.imooc.mybatis.entity.Goods"
-            useGeneratedKeys="true"
-            keyProperty="goodsId"
-            keyColumn="goods_id"
-    >
-        INSERT INTO t_goods(title, sub_title, original_cost, current_price, discount, is_free_delivery, category_id)
-        VALUES (#{title} , #{subTitle} , #{originalCost}, #{currentPrice}, #{discount}, #{isFreeDelivery}, #{categoryId})
-    </insert>
-
-    <update id="update" parameterType="com.imooc.mybatis.entity.Goods">
-        UPDATE t_goods
-        SET
-            title = #{title},
-            sub_title = #{subTitle},
-            original_cost = #{originalCost},
-            current_price = #{currentPrice},
-            discount = #{discount},
-            is_free_delivery = #{isFreeDelivery},
-            category_id = #{categoryId}
-        WHERE
-            goods_id = #{goodsId}
-    </update>
-    <delete id="delete" parameterType="Integer">
-        DELETE FROM t_goods WHERE goods_id = #{value }
-    </delete>
+    <select id="dynamicSQL" parameterType="java.util.Map" resultType="com.imooc.mybatis.entity.Goods">
+        select * from t_goods
+        <where>
+            <if test="categoryId != null">
+                and category_id = #{categoryId}
+            </if>
+            <if test="currentPrice != null">
+                and current_price &lt; #{currentPrice}
+            </if>
+        </where>
+    </select>
 </mapper>

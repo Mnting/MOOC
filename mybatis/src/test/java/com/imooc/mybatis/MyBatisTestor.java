@@ -144,7 +144,7 @@ public class MyBatisTestor {
     }
 
     @Test
-    public void testInsert () throws Exception{
+    public void testInsert   () throws Exception{
         SqlSession sqlSession = null;
         try{
             sqlSession = MyBatisUtils.openSession();
@@ -203,4 +203,25 @@ public class MyBatisTestor {
             MyBatisUtils.closeSession(sqlSession);
         }
     }
+
+    @Test
+    public void testDynamicSQL() throws Exception {
+        SqlSession sqlSession = null;
+        try {
+            sqlSession = MyBatisUtils.openSession();
+            Map param = new HashMap();
+            param.put("categoryId", 44);
+            param.put("currentPrice", 500);
+            //查询条件
+            List<Goods> list = sqlSession.selectList("goods.dynamicSQL", param);
+            for (Goods g : list) {
+                System.out.println(g.getTitle() + ":" + g.getCategoryId() + ":" + g.getCurrentPrice());
+            }
+        }catch(Exception e){
+            throw e;
+        }finally{
+            MyBatisUtils.closeSession(sqlSession);
+        }
+    }
+
 }
