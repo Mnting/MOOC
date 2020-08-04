@@ -224,4 +224,40 @@ public class MyBatisTestor {
         }
     }
 
+    @Test
+    public void testLv1Cache() throws Exception{
+        SqlSession sqlSession = null;
+        try{
+            sqlSession = MyBatisUtils.openSession();
+            Goods goods = sqlSession.selectOne("goods.selectById",1603);
+            Goods goods1 = sqlSession.selectOne("goods.selectById",1603);
+            System.out.println(goods.getTitle());
+            //由于默认开启了一级缓存（针对SqlSession），执行第二次重复操作的时候
+            //系统判定缓存内已有查询结果，便直接将缓存对象赋给goods1，故两次hashCode完全相等
+            System.out.println(goods.hashCode() + ":" + goods1.hashCode());
+        }catch(Exception e){
+            throw e;
+        }finally {
+            MyBatisUtils.closeSession(sqlSession);
+        }
+
+        try{
+            sqlSession = MyBatisUtils.openSession();
+            Goods goods = sqlSession.selectOne("goods.selectById",1603);
+            Goods goods1 = sqlSession.selectOne("goods.selectById",1603);
+            //由于默认开启了一级缓存（针对SqlSession）
+            //前一个SqlSession已经关闭，此时相当于执行两个不同的会话
+            //可以看到在同一个会话的相同操作hashcode相同
+            //不同会话中的相同操作hashcode不同，也验证了一级缓存的生存周期只存在于一个sqlSession中
+            System.out.println(goods.hashCode() + ":" + goods1.hashCode());
+            //commit提交时对该namespace缓存强制清空
+            sqlSession.commit();
+            Goods goods2 = sqlSession.selectOne("goods.selectById",1603);
+            System.out.println(goods2.hashCode());
+        }catch(Exception e){
+            throw e;
+        }finally {
+            MyBatisUtils.closeSession(sqlSession);
+        }
+    }
 }
