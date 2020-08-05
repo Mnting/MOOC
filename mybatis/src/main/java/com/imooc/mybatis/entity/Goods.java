@@ -1,14 +1,26 @@
 package com.imooc.mybatis.entity;
 
+import java.util.List;
+
 public class Goods {
     private Integer goodsId;//商品编号
     private String title;//标题
     private String subTitle;//子标题
+
+    public List<GoodsDetail> getGoodsDetails() {
+        return goodsDetails;
+    }
+
+    public void setGoodsDetails(List<GoodsDetail> goodsDetails) {
+        this.goodsDetails = goodsDetails;
+    }
+
     private Float originalCost;//原始价格
     private Float currentPrice;//当前价格
     private Float discount;//折扣率
     private Integer isFreeDelivery;//是否包邮 ,1-包邮 0-不包邮
     private Integer categoryId;//分类编号
+    private List<GoodsDetail> goodsDetails;
 
     public Integer getGoodsId() {
         return goodsId;

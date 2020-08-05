@@ -2,6 +2,7 @@ package com.imooc.mybatis;
 
 import com.imooc.mybatis.dto.GoodsDTO;
 import com.imooc.mybatis.entity.Goods;
+import com.imooc.mybatis.entity.GoodsDetail;
 import com.imooc.mybatis.utils.MyBatisUtils;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -255,6 +256,48 @@ public class MyBatisTestor {
             Goods goods2 = sqlSession.selectOne("goods.selectById",1603);
             System.out.println(goods2.hashCode());
         }catch(Exception e){
+            throw e;
+        }finally {
+            MyBatisUtils.closeSession(sqlSession);
+        }
+    }
+
+    @Test
+    public void testLv2Cache() throws Exception{
+        //在goods.xml中开启二级缓存后，缓存范围是命名空间namespace
+        //缓存也不随sqlsession的关闭而清空，所以当执行两次相同操作时，第二次其实是在读取缓存
+        SqlSession sqlSession = null;
+        try{
+            sqlSession = MyBatisUtils.openSession();
+            Goods goods = sqlSession.selectOne("goods.selectById",1603);
+            System.out.println(goods.hashCode());
+        }catch(Exception e){
+            throw e;
+        }finally {
+            MyBatisUtils.closeSession(sqlSession);
+        }
+
+        try{
+            sqlSession = MyBatisUtils.openSession();
+            Goods goods = sqlSession.selectOne("goods.selectById",1603);
+            System.out.println(goods.hashCode() );
+        }catch(Exception e){
+            throw e;
+        }finally {
+            MyBatisUtils.closeSession(sqlSession);
+        }
+    }
+
+    @Test
+    public void testOneToMant() throws Exception {
+        SqlSession sqlSession = null;
+        try {
+            sqlSession = MyBatisUtils.openSession();
+            List<Goods> list = sqlSession.selectList("goods.selectOneToMany");
+            for (Goods goods : list) {
+                System.out.println(goods.getTitle() + ":" + goods.getGoodsDetails().size());
+            }
+        }catch (Exception e){
             throw e;
         }finally {
             MyBatisUtils.closeSession(sqlSession);
