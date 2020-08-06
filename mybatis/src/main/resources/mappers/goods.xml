@@ -111,6 +111,6 @@
                     column="goods_id"/>
     </resultMap>
     <select id="selectOneToMany" resultMap="rmGoodsDetail">
-        select * from t_goods limit 0,1;
+        select * from t_goods limit 0,10
     </select>
 </mapper>
