@@ -7,21 +7,44 @@
         <!-- goods_id ==> goodsId 开启驼峰命名转换，可以将实体类中的字段与数据库中实际字段进行匹配-->
         <setting name="mapUnderscoreToCamelCase" value="true"/>
     </settings>
+
+    <!--启用Pagehelper分页插件-->
+    <plugins>
+        <plugin interceptor="com.github.pagehelper.PageInterceptor">
+            <!--设置数据库类型-->
+            <property name="helperDialect" value="mysql"/>
+            <!--分页合理化-->
+            <property name="reasonable" value="true"/>
+        </plugin>
+    </plugins>
+    
     <!--设置默认指向的数据库-->
     <environments default="dev">
         <!--配置环境，不同的环境不同的id名字-->
         <environment id="dev">
             <!--采用JDBC方式对数据库事务进行commit/rollback-->
             <transactionManager type="JDBC"></transactionManager>
-            <dataSource type="POOLED">
-                <property name="driver" value="com.mysql.jdbc.Driver "/>
+<!--            <dataSource type="POOLED">-->
+<!--                <property name="driver" value="com.mysql.jdbc.Driver "/>-->
+<!--                &lt;!&ndash;‘&amp;’是‘&’的转义&ndash;&gt;-->
+<!--                <property name="url" value="jdbc:mysql://localhost:3306/babytun?useUnicode=true&amp;characterEncoding=UTF=8"/>-->
+<!--                <property name="driver" value="com.mysql.jdbc.Driver"/>-->
+<!--                &lt;!&ndash;‘&amp;’是‘&’的转义&ndash;&gt;-->
+<!--                <property name="url" value="jdbc:mysql://localhost:3306/babytun?useUnicode=true&amp;characterEncoding=UTF-8&amp;serverTimezone=Asia/Shanghai&amp;useSSL=false"/>-->
+<!--                <property name="username" value="root"/>-->
+<!--                <property name="password" value="123456"/>-->
+<!--            </dataSource>-->
+            <dataSource type="com.imooc.mybatis.datasource.C3P0DataSourceFactory">
+                <property name="driverClass" value="com.mysql.jdbc.Driver"/>
                 <!--‘&amp;’是‘&’的转义-->
-                <property name="url" value="jdbc:mysql://localhost:3306/babytun?useUnicode=true&amp;characterEncoding=UTF=8"/>
-                <property name="driver" value="com.mysql.jdbc.Driver"/>
-                <!--‘&amp;’是‘&’的转义-->
-                <property name="url" value="jdbc:mysql://localhost:3306/babytun?useUnicode=true&amp;characterEncoding=UTF-8&amp;serverTimezone=Asia/Shanghai&amp;useSSL=false"/>
-                <property name="username" value="root"/>
+                <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/babytun?useUnicode=true&amp;characterEncoding=UTF-8"/>
+                <property name="user" value="root"/>
                 <property name="password" value="123456"/>
+                <!--初始连接池连接数量-->
+                <property name="initialPoolSize" value="5"/>
+                <!--最大/最小连接池连接数量-->
+                <property name="maxPoolSize" value="20"/>
+                <property name="minPoolSize" value="5"/>
             </dataSource>
         </environment>
         <environment id="prd">

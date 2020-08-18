@@ -16,9 +16,7 @@ import java.io.IOException;
 import java.io.Reader;
 import java.net.ConnectException;
 import java.sql.Connection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 //单元测试类
 public class MyBatisTestor {
@@ -346,4 +344,19 @@ public class MyBatisTestor {
             MyBatisUtils.closeSession(sqlSession);
         }
     }
+
+    @Test
+    public void testBatchInsert() throws Exception {
+        SqlSession sqlSession = null;
+        try {
+            sqlSession = MyBatisUtils.openSession();
+            List list = new ArrayList();
+            long st = new Date().getTime();
+        }catch (Exception e){
+            throw e;
+        }finally {
+            MyBatisUtils.closeSession(sqlSession);
+        }
+    }
+
 }
