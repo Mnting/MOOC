@@ -119,10 +119,10 @@
     </select>
     
     <insert id="batchInsert" parameterType="java.util.List">
-        INSERT INTO t_goods(title, sub_title, original_cost, current_price, discount, is_free_deliverry, category_id)
+        INSERT INTO t_goods(title,sub_title,original_cost,current_price,discount,is_free_delivery,category_id)
         VALUES
         <foreach collection="list" item="item" index="index" separator=",">
-            (#{item.title},#{subTitle},#{originalCost},#{currentPrice},#{discount},#{isFreeDeliverry},#{categoryId})
+            (#{item.title}, #{item.subTitle},#{item.originalCost},#{item.currentPrice},#{item.discount},#{item.isFreeDelivery},#{item.categoryId})
         </foreach>
     </insert>
 </mapper>
