@@ -379,4 +379,28 @@ public class MyBatisTestor {
         }
     }
 
+    @Test
+    public void testBatchDelete() throws Exception {
+        SqlSession sqlSession = null;
+        try {
+            sqlSession = MyBatisUtils.openSession();
+            List list = new ArrayList();
+            long st = new Date().getTime();
+            list.add(1920);
+            list.add(1921);
+            list.add(1922);
+            sqlSession.insert("goods.batchDelete",list);
+            sqlSession.commit();//提交事务数据
+            long et = new Date().getTime();
+            System.out.println("执行时间" + (et-st) + "毫秒");
+        }catch (Exception e){
+            if(sqlSession != null){
+                sqlSession.rollback();//回滚事务
+            }
+            throw e;
+        }finally {
+            MyBatisUtils.closeSession(sqlSession);
+        }
+    }
+
 }

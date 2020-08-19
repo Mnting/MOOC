@@ -125,4 +125,11 @@
             (#{item.title}, #{item.subTitle},#{item.originalCost},#{item.currentPrice},#{item.discount},#{item.isFreeDelivery},#{item.categoryId})
         </foreach>
     </insert>
+
+    <delete id="batchDelete" parameterType="java.util.List">
+        DELETE FROM t_goods WHERE goods_id IN
+        <foreach collection="list" item="item" index="index" open="(" close=")" separator=",">
+            #{item}
+        </foreach>
+    </delete>
 </mapper>
