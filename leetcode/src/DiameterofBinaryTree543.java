@@ -1,7 +1,6 @@
 import org.junit.Test;
 import sun.reflect.generics.tree.Tree;
 
-import javax.swing.tree.TreeNode;
 import java.util.Enumeration;
 
 /**
