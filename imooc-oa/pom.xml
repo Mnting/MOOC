@@ -57,6 +57,8 @@
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.12</version>
+<!--            只参与Maven Test,不进行发布-->
+            <scope>test</scope>
         </dependency>
         <!--Logback日志输出组件-->
         <dependency>
