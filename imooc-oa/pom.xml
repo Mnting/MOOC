@@ -81,7 +81,7 @@
 <!--            依赖只参与编译测试,不进行发布-->
             <scope>provided</scope>
         </dependency>
-
+<!--        Fastjson JSON序列化组件-->
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>

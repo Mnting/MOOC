@@ -1,5 +1,6 @@
 package com.imooc.oa.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.imooc.oa.entity.User;
 import com.imooc.oa.service.UserService;
 import com.imooc.oa.service.exception.BussinessException;
@@ -12,6 +13,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @Author Tianhao Tao
@@ -20,22 +23,33 @@ import java.io.IOException;
  */
 @WebServlet(name = "LoginServlet" ,urlPatterns = "/check_login")
 public class LoginServlet extends HttpServlet {
-    Logger logger = LoggerFactory.getLogger(LoginServlet.class)
+    Logger logger = LoggerFactory.getLogger(LoginServlet.class);
     private UserService userService = new UserService();
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("utf-8");
         response.setContentType("text/html;charset=utf-8");
         String username = request.getParameter("username");
         String password = request.getParameter("password");
+        Map<String,Object> result = new HashMap<>();
         try{
             User user = userService.checkLogin(username, password);
+            result.put("code","0");
+            result.put("message", "success");
         }catch (BussinessException e){
             logger.error(e.getMessage(),e);
+            result.put("code",e.getCode());
+            result.put("message", e.getMessage());
         }catch (Exception e){
             logger.error(e.getMessage(),e);
+            result.put("code",e.getClass().getSimpleName());
+            result.put("message", e.getMessage());
         }
+        String json = JSON.toJSONString(result);
+        response.getWriter().println(json);
     }
 
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
