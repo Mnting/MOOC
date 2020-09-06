@@ -1,3 +1,5 @@
+package main.java.com.leetcode.leetcode;
+
 import org.junit.Test;
 import sun.reflect.generics.tree.Tree;
 

@@ -1,3 +1,6 @@
+package main.java.com.leetcode.leetcode;
+
+
 /**
  * @Author Tianhao Tao
  * @Date 2020/8/28 16:48
