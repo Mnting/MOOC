@@ -32,30 +32,40 @@
     <h1 style="text-align: center;margin-bottom: 20px">慕课网办公OA系统</h1>
     <form class="layui-form">
         <div class="layui-form-item">
-            <input type="text" id="username" lay-verify="required" placeholder="请输入标题" autocomplete="off"
+            <input type="text" id="username" lay-verify="required" name="username" placeholder="请输入标题"
+                   autocomplete="off"
                    class="layui-input">
         </div>
         <div class="layui-form-item">
-            <input type="password" id="password" placeholder="请输入密码" autocomplete="off"
+            <input type="password" id="password" lay-verify="required" name="password" placeholder="请输入密码"
+                   autocomplete="off"
                    class="layui-input">
         </div>
         <div class="layui-form-item">
             <button class="layui-btn layui-btn-fluid" lay-submit lay-filter="login">登录</button>
         </div>
     </form>
-
-    <script src="/resources/layui/layui.all.js">
-        //Demo
-        layui.use('form', function () {
-            var form = layui.form;
-
-            //监听提交
-            form.on('submit(login)', function (data) {
-                layer.msg(JSON.stringify(data.field));
-                return false;
-            });
-        });
-    </script>
 </div>
+<script src="/resources/layui/layui.all.js"></script>
+<script>
+    layui.form.on("submit(login)", function (formData) { //formData参数包含了当前表单的数据
+        layui.$.ajax({
+            url: "/check_login",
+            data: formData.field,
+            type: "post",
+            dataType: "json",
+            success: function (json) {
+                console.log(json);
+                if (json.code == 0) {
+                    layui.layer.msg("login success");
+                }else{
+                    layui.layer.msg(json.message);
+                }
+            }
+        })
+        console.log(formData);
+        return false;//submit提交事件返回true则表单提交，false则阻止表单提交
+    })
+</script>
 </body>
 </html>
