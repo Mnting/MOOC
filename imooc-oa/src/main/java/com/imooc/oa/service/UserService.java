@@ -5,14 +5,16 @@ package com.imooc.oa.service;/**
  */
 
 import com.imooc.oa.dao.UserDao;
+import com.imooc.oa.dao.RbacDao;
+import com.imooc.oa.entity.Node;
 import com.imooc.oa.entity.User;
 import com.imooc.oa.service.exception.BussinessException;
-import javafx.application.Application;
-import javafx.stage.Stage;
+
+import java.util.List;
 
 public class UserService{
     private UserDao userDao = new UserDao();
-
+    private RbacDao rbacDao = new RbacDao();
     /**
      * 根据前台输入进行登录校验
      * @param username 前台输入的用户名
@@ -30,5 +32,9 @@ public class UserService{
             throw new BussinessException("L002", "密码不正确");
         }
         return user;
+    }
+
+    public List<Node> selectNodeByUserId(Long userId){
+        return rbacDao.selectNodeByUserId(userId);
     }
 }

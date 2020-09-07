@@ -8,7 +8,7 @@ import org.junit.Test;
  * @Date 2020/9/2 14:39
  * @Version 1.0
  */
-public class UserServiceTest extends TestCase {
+public class UserServiceTest {
 
     private UserService userService = new UserService();
 
@@ -23,5 +23,10 @@ public class UserServiceTest extends TestCase {
     @Test
     public void testCheckLogin3() {
         userService.checkLogin("m8", "1234");
+    }
+
+    @Test
+    public void testSelectNodeByUserId(){
+        System.out.println(userService.selectNodeByUserId(2l));
     }
 }
