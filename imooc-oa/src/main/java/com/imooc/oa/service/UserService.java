@@ -9,6 +9,7 @@ import com.imooc.oa.dao.RbacDao;
 import com.imooc.oa.entity.Node;
 import com.imooc.oa.entity.User;
 import com.imooc.oa.service.exception.BussinessException;
+import com.imooc.oa.utils.MD5Utiles;
 
 import java.util.List;
 
@@ -28,7 +29,9 @@ public class UserService{
             //抛出用户不存在异常
             throw new BussinessException("L001", "用户名不存在");
         }
-        if (!password.equals(user.getPassword())) {
+        //对前台输入的密码加盐混淆后生成MD5，与保存在数据库中的MD5密码进行比对
+        String md5 = MD5Utiles.md5Digest(password,user.getSalt());
+        if (!md5.equals(user.getPassword())) {
             throw new BussinessException("L002", "密码不正确");
         }
         return user;

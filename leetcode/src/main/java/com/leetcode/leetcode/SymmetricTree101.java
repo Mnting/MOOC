@@ -7,26 +7,21 @@ import java.util.List;
  * @author TianHao Tao
  */
 public class SymmetricTree101 {
-    private List<Integer> list = new ArrayList();
 
     public boolean isSymmetric(TreeNode root) {
-        addList(root);
-        for (int i = 0; i < list.size() / 2; i++) {
-            if (list.get(i).equals(list.get(list.size() - i - 1))) {
-                return false;
-            }
+        if (root == null) {
+            return true;
         }
-        return true;
+        return check(root.left, root.right);
     }
 
-    TreeNode addList(TreeNode root) {
-        if (root == null) {
-            list.add(null);
-            return null;
+    boolean check(TreeNode left, TreeNode right) {
+        if (left == null && right == null) {
+            return true;
         }
-        addList(root.left);
-        list.add(root.val);
-        addList(root.right);
-        return root;
+        if (left == null || right == null) {
+            return false;
+        }
+        return (left.val == right.val) && check(left.left, right.right) && check(left.right, right.left);
     }
 }
