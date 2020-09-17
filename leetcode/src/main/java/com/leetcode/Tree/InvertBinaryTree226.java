@@ -1,4 +1,4 @@
-package main.java.com.leetcode.leetcode;
+package main.java.com.leetcode.Tree;
 
 /**
  * @Author Tianhao Tao

@@ -1,9 +1,4 @@
-package main.java.com.leetcode.leetcode;
-
-import org.junit.Test;
-import sun.reflect.generics.tree.Tree;
-
-import java.util.Enumeration;
+package main.java.com.leetcode.Tree;
 
 /**
  * @Author Tianhao Tao

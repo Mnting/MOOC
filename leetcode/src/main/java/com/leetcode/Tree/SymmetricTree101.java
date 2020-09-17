@@ -1,7 +1,4 @@
-package main.java.com.leetcode.leetcode;
-
-import java.util.ArrayList;
-import java.util.List;
+package main.java.com.leetcode.Tree;
 
 /**
  * @author TianHao Tao
