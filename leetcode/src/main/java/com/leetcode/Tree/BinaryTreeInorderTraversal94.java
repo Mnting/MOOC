@@ -13,16 +13,26 @@ public class BinaryTreeInorderTraversal94 {
     public List<Integer> inorderTraversal(TreeNode root) {
         List<Integer> list = new ArrayList<Integer>();
         LinkedList<TreeNode> stack = new LinkedList<TreeNode>();
-        if(root==null) {
+        if (root == null) {
             return list;
         }
-        while(!stack.isEmpty()) {
-            stack.add(root);
-            while(root.left!=null){
+        stack.add(root);
+        while (!stack.isEmpty()) {
+            while (root.left != null) {
                 root = root.left;
                 stack.add(root);
             }
-            while(root)
+            list.add(root.val);
+            stack.pollLast();
+            while (root.right == null) {
+                root = stack.pollLast();
+                if (root == null) {
+                    return list;
+                }
+                list.add(root.val);
+            }
+            root = root.right;
+            stack.add(root);
         }
         return list;
     }
