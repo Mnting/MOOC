@@ -29,7 +29,7 @@ public class LeaveFormService {
      * @return 持久化后的请假单对象
      */
     public LeaveForm createLeaveForm(LeaveForm form) {
-        MybatisUtils.executeUpdate(sqlSession -> {
+        LeaveForm savedForm = (LeaveForm) MybatisUtils.executeUpdate(sqlSession -> {
             //1.持久化form表单数据,8级以下员工表单状态为processing,8级(总经理)状态为approved.
 
             EmployeeDao employeeDao = sqlSession.getMapper(EmployeeDao.class);
@@ -65,8 +65,8 @@ public class LeaveFormService {
                 flow2.setOrderNo(2);
                 flow2.setState("process");
                 long diff = form.getEndTime().getTime() - form.getStartTime().getTime();
-                float hours = diff/(1000*60*60) * 1f;
-                if(hours >= BussinessConstants.MANAGER_AUDIT_HOURS){
+                float hours = diff / (1000 * 60 * 60) * 1f;
+                if (hours >= BussinessConstants.MANAGER_AUDIT_HOURS) {
                     flow2.setIsLast(0);
                     processFlowDao.insert(flow2);
                     Employee manager = employeeDao.selectLeader(dmanager);
@@ -79,14 +79,45 @@ public class LeaveFormService {
                     flow3.setOrderNo(3);
                     flow3.setIsLast(1);
                     processFlowDao.insert(flow3);
-                }else {
+                } else {
                     flow2.setIsLast(1);
                     processFlowDao.insert(flow2);
                 }
-            }
+            } else if (employee.getLevel() == 7) {//部门经理
+                //3.2 7级员工,生成总经理审批任务
+                Employee manager = employeeDao.selectLeader(employee);
+                ProcessFlow flow = new ProcessFlow();
+                flow.setFormId(form.getFormId());
+                flow.setOperatorId(manager.getEmployeeId());
+                flow.setAction("audit");
+                flow.setCreateTime(new Date());
+                flow.setState("process");
+                flow.setOrderNo(2);
+                flow.setIsLast(1);
+                processFlowDao.insert(flow);
+                //请假单已提交消息
+//                String noticeContent = String.format("您的请假申请[%s-%s]已提交,请等待上级审批."
+//                        , sdf.format(form.getStartTime()), sdf.format(form.getEndTime()));
+//                noticeDao.insert(new Notice(employee.getEmployeeId(), noticeContent));
 
-            //3.2 7级员工,生成总经理审批任务
-            //3.3 8级员工,生成总经理审批任务,系统自动通过
+            }else if(employee.getLevel()==8){
+                //3.3 8级员工,生成总经理审批任务,系统自动通过
+                Employee manager = employeeDao.selectLeader(employee);
+                ProcessFlow flow = new ProcessFlow();
+                flow.setFormId(form.getFormId());
+                flow.setOperatorId(manager.getEmployeeId());
+                flow.setAction("audit");
+                flow.setResult("approved");
+                flow.setReason("自动通过");
+                flow.setCreateTime(new Date());
+                flow.setAuditTime(new Date());
+                flow.setState("complete");
+                flow.setOrderNo(2);
+                flow.setIsLast(1);
+                processFlowDao.insert(flow);
+            }
+            return form;
         });
+        return savedForm;
     }
 }

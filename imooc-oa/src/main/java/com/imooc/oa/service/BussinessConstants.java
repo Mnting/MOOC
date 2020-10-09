@@ -6,6 +6,6 @@ package com.imooc.oa.service;
  * @Version 1.0
  */
 public class BussinessConstants {
-    public static final int MANAGER_AUDIT_HOURS=72;//总经理请假审批时间阈值
+    public static final int MANAGER_AUDIT_HOURS=36;//总经理请假审批时间阈值
 }
 
