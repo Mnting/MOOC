@@ -1,4 +1,4 @@
-package com.imooc.spring.ioc.entity;
+package com.imooc.spring.ioc02.entity;
 
 /**
  * @Author Tianhao Tao
@@ -11,11 +11,9 @@ public class Apple {
     private String origin;
 
     public Apple() {
-        System.out.println("已创建Apple对象"+this);
     }
 
     public Apple(String title, String color, String origin) {
-        System.out.println("带参构造"+this);
         this.title = title;
         this.color = color;
         this.origin = origin;
