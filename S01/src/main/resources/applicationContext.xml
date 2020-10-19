@@ -41,4 +41,7 @@
     <!--利用静态工厂获取对象-->
     <bean id="apple4" class="com.imooc.spring.ioc02.factory.AppleStaticFactory"
           factory-method="createSweetApple"/>
+    <!--利用工厂实例方法获取对象-->
+    <bean id="factoryInstance" class="com.imooc.spring.ioc02.factory.AppleFactoryInstance"/>
+    <bean id="apple5" factory-bean="factoryInstance" factory-method="createSweetApple"/>
 </beans>
