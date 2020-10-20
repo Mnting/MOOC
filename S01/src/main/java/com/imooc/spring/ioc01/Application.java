@@ -1,7 +1,7 @@
-package com.imooc.spring.ioc;
+package com.imooc.spring.ioc01;
 
-import com.imooc.spring.ioc.entity.Apple;
-import com.imooc.spring.ioc.entity.Child;
+import com.imooc.spring.ioc01.entity.Apple;
+import com.imooc.spring.ioc01.entity.Child;
 
 /**
  * @Author Tianhao Tao

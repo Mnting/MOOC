@@ -1,4 +1,4 @@
-package com.imooc.spring.ioc.entity;
+package com.imooc.spring.ioc01.entity;
 
 /**
  * @Author Tianhao Tao
