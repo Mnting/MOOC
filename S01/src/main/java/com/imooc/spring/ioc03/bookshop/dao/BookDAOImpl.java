@@ -8,6 +8,6 @@ package com.imooc.spring.ioc03.bookshop.dao;
 public class BookDAOImpl implements BookDAO{
 
     public void insert() {
-        System.out.println("插入数据！");
+        System.out.println("向MySQL插入数据！");
     }
 }
