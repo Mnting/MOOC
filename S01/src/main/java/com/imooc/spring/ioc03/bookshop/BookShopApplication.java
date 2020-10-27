@@ -14,5 +14,9 @@ public class BookShopApplication {
         ApplicationContext context = new ClassPathXmlApplicationContext("classpath:applicationContext03-*.xml");
         BookService bookService = context.getBean("bookService",BookService.class);
         bookService.purchase();
+        String[] beanNames = context.getBeanDefinitionNames();
+        for (String beanName : beanNames){
+            System.out.println(beanName);
+        }
     }
 }
