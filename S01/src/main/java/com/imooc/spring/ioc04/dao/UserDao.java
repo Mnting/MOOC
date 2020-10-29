@@ -12,4 +12,7 @@ import org.springframework.stereotype.Repository;
 //@Repository("udao")
 @Repository
 public class UserDao {
+    public UserDao(){
+        System.out.println("正在创建："+this);
+    }
 }

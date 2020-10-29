@@ -11,9 +11,9 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class SpringApplication {
     public static void main(String[] args) {
         ApplicationContext context = new ClassPathXmlApplicationContext("classpath:ioc04/applicationContext.xml");
-        String[] ids = context.getBeanDefinitionNames();
-        for (String id : ids){
-            System.out.println(id);
-        }
+//        String[] ids = context.getBeanDefinitionNames();
+//        for (String id : ids){
+//            System.out.println(id);
+//        }
     }
 }

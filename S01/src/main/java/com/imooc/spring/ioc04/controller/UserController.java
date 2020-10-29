@@ -9,4 +9,7 @@ import org.springframework.stereotype.Controller;
  */
 @Controller
 public class UserController {
+    public UserController(){
+        System.out.println("正在创建："+this);
+    }
 }
