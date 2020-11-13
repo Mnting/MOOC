@@ -3,6 +3,9 @@ package top.taotianhao.gitshow;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+/**
+ * @author Taotianhao
+ */
 @SpringBootApplication
 public class GitshowApplication {
 
