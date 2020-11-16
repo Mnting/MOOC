@@ -1,0 +1,38 @@
+.border{
+    height:150px;
+    border-style:solid;
+    border-width:thin;
+    border-radius:5px;
+    margin:0px 5px 5px 5px;
+}
+
+.graph{
+    height:100px;
+    border-style:solid;
+    border-width:thin;
+    border-radius:3px;
+    margin:0px 5px 5px 5px;
+    border-color:#C0C0C0;
+}
+
+.save-file{
+    height:60px;
+    border-style:solid;
+    border-width:thin;
+    border-radius:3px;
+    margin:0px 5px 5px 5px;
+    border-color:#C0C0C0;
+}
+
+.edit-file {
+    height:150px;
+    border-style:solid;
+    border-width:thin;
+    border-radius:3px;
+    margin:5px;
+    border-color:#C0C0C0;
+}
+
+.git-bash{
+    height:50px;
+}
