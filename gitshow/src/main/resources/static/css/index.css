@@ -1,7 +1,3 @@
-.bg{
-    height: 800px;
-    width: 500px;
-}
 
 .border{
     height:150px;
@@ -12,7 +8,7 @@
 }
 
 .graph{
-    height:100px;
+    height:150px;
     border-style:solid;
     border-width:thin;
     border-radius:3px;
@@ -21,7 +17,7 @@
 }
 
 .save-file{
-    height:60px;
+    height:40px;
     border-style:solid;
     border-width:thin;
     border-radius:3px;
@@ -30,7 +26,7 @@
 }
 
 .edit-file {
-    height:150px;
+    height:70px;
     border-style:solid;
     border-width:thin;
     border-radius:3px;

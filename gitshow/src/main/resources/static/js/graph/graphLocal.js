@@ -1,4 +1,4 @@
-import G6 from '@antv/g6';
+// import G6 from '@antv/g6';
 
 G6.registerNode('card-node', {
     draw: function drawShape(cfg, group) {
@@ -68,7 +68,7 @@ G6.registerNode('card-node', {
                 text: 'description',
                 fill: 'rgba(0,0,0, 1)',
             },
-            name: `description`,
+            //name: `description`,
         });
         return shape;
     },
@@ -86,30 +86,35 @@ const data = {
     children: [
         {
             id: 'A1',
-            children: [{ id: 'A11' }, { id: 'A12' }, { id: 'A13' }, { id: 'A14' }],
+            children: [
+                { id: 'A11' ,
+                    children: [
+                        { id: 'A111' ,
+                            children:[
+                                {id: 'A1111'}
+                            ]
+                        }]
+                }],
         },
         {
             id: 'A2',
             children: [
                 {
                     id: 'A21',
-                    children: [{ id: 'A211' }, { id: 'A212' }],
-                },
-                {
-                    id: 'A22',
+                    children: [{ id: 'A211' }],
                 },
             ],
         },
     ],
 };
 
-const width = document.getElementById('container').scrollWidth;
-const height = document.getElementById('container').scrollHeight || 500;
+const width = document.getElementById('local').scrollWidth;
+const height = document.getElementById('local').scrollHeight || 500;
 
-const graph = new G6.TreeGraph({
-    container: 'container',
-    width,
-    height,
+const graphRemote = new G6.TreeGraph({
+    container: 'local',
+    width: 600,
+    height: 150,
     defaultNode: {
         type: 'card-node',
         size: [100, 40],
@@ -122,7 +127,7 @@ const graph = new G6.TreeGraph({
     },
     layout: {
         type: 'indented',
-        direction: 'LR',
+        direction: 'LR',//（左）LR。（中）RL。（右）H。
         dropCap: false,
         indent: 200,
         getHeight: () => {
@@ -131,33 +136,13 @@ const graph = new G6.TreeGraph({
     },
 });
 
-// graph.data(data);
-// graph.render();
-// graph.fitView();
-// graph.on('node:click', (e) => {
-//     if (e.target.get('name') === 'collapse-icon') {
-//         e.item.getModel().collapsed = !e.item.getModel().collapsed;
-//         graph.setItemState(e.item, 'collapsed', e.item.getModel().collapsed);
-//         graph.layout();
-//     }
-// });
-//
-// <script src="https://gw.alipayobjects.com/os/antv/pkg/_antv.g6-3.1.0/build/g6.js"></script>
-//     <script>
-// const graph = new G6.Graph({
-//     container: 'mountNode',
-//     width: 1000,
-//     height: 600,
-//     renderer: 'svg',
-//     fitView: true,
-//     fitViewPadding: [ 20, 40, 50, 20 ]
-// });
-//
-// const main = async () => {
-//     const response = await fetch('https://gw.alipayobjects.com/os/basement_prod/6cae02ab-4c29-44b2-b1fd-4005688febcb.json');
-//     const remoteData = await response.json();
-//     graph.data(remoteData);
-//     graph.render();
-// };
-// main();
-// </script>
+graphRemote.data(data);
+graphRemote.render();
+graphRemote.fitView();
+graphRemote.on('node:click', (e) => {
+    if (e.target.get('name') === 'collapse-icon') {
+        e.item.getModel().collapsed = !e.item.getModel().collapsed;
+        graphRemote.setItemState(e.item, 'collapsed', e.item.getModel().collapsed);
+        graphRemote.layout();
+    }
+});

@@ -1,0 +1,6 @@
+{
+  "main": "graph.js",
+  "dependencies": {
+    "@antv/g6": "latest"
+  }
+}
