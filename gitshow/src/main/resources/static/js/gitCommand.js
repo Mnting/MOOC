@@ -4,7 +4,8 @@ $(function () {
         placement : 'bottom',//弹出位置
         html : true,//content中插入html代码
         animation: false
-    }).on("mouseenter", function () {
+    })
+        .on("mouseenter", function () {
         var _this = this;
         $(this).popover("show");
         $(this).siblings(".popover").on("mouseleave", function () {

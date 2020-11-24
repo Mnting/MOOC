@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
  * @Version 1.0
  */
 @Controller
-public class GraphContoller {
-    @GetMapping("/graph")
-    public String graph(){return "graph";}
+public class TestContoller {
+    @GetMapping("/test")
+    public String graph(){return "test";}
 }
