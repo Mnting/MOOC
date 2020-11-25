@@ -16,15 +16,14 @@
         <link rel="stylesheet" href="css/bootstrap.min.css"/>
         <!--    <link rel="stylesheet" href="css/bootstrap-theme.min.css"/>-->
         <link rel="stylesheet" href="css/index.css">
-        <link rel="stylesheet" href="css/gitCommand.css">
+        <link rel="stylesheet" href="css/gitCommandImage.css">
     </head>
 <body>
 <!--<script src="js/bootstrap.min.js"></script>-->
 <script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
 <!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"></script>
-<script src="js/gitCommand.js" type="module"></script>
+<script src="js/gitCommandImage.js" type="module"></script>
 <nav class="navbar navbar-inverse" role="navigation">
     <div class="container-fluid">
         <div class="navbar-header">
@@ -33,8 +32,11 @@
         <div>
             <ul class="nav navbar-nav">
                 <li class="active">
-                    <a target="_blank" href="http://121.196.58.201:8887/index.php?user/publicLink&fid=a019VrPZPUj9aIEzgxqAjzmJkzdrJaKheqy4XzU0vaB3611A2efKeJaBNnSYG8L75i9jdAmWN62qBs6Uhf_72mMX4yyRqg7tZLGwOc98tFx8nX9R-4J0EkpMcSk2RQ6ZagkyxpT93Q1qt-GeFg&file_name=/git.png" data-toggle="popover"
-                                      data-html="true" data-content="<img class=image src=http://121.196.58.201:8887/index.php?user/publicLink&fid=a019VrPZPUj9aIEzgxqAjzmJkzdrJaKheqy4XzU0vaB3611A2efKeJaBNnSYG8L75i9jdAmWN62qBs6Uhf_72mMX4yyRqg7tZLGwOc98tFx8nX9R-4J0EkpMcSk2RQ6ZagkyxpT93Q1qt-GeFg&file_name=/git.png>">Git常用命令速查表</a>
+                    <a target="_blank"
+                       href="http://121.196.58.201:8887/index.php?user/publicLink&fid=a019VrPZPUj9aIEzgxqAjzmJkzdrJaKheqy4XzU0vaB3611A2efKeJaBNnSYG8L75i9jdAmWN62qBs6Uhf_72mMX4yyRqg7tZLGwOc98tFx8nX9R-4J0EkpMcSk2RQ6ZagkyxpT93Q1qt-GeFg&file_name=/git.png"
+                       data-toggle="popover"
+                       data-html="true"
+                       data-content="<img class=image src=http://121.196.58.201:8887/index.php?user/publicLink&fid=a019VrPZPUj9aIEzgxqAjzmJkzdrJaKheqy4XzU0vaB3611A2efKeJaBNnSYG8L75i9jdAmWN62qBs6Uhf_72mMX4yyRqg7tZLGwOc98tFx8nX9R-4J0EkpMcSk2RQ6ZagkyxpT93Q1qt-GeFg&file_name=/git.png>">Git常用命令速查表</a>
                 </li>
                 <li><a href="#">菜单二</a></li>
             </ul>
@@ -52,9 +54,9 @@
                         <script src="js/graph/graphRemote.js" type="module"></script>
                         <div id="remote"></div>
                     </div>
-                    <div class="save-file">
-                        此处是仓库文件
-                    </div>
+                    <!--                    <div class="save-file">-->
+                    <!--                        此处是仓库文件-->
+                    <!--                    </div>-->
 
                 </div>
             </div>
@@ -71,11 +73,18 @@
                             <script src="js/graph/graphLocal.js" type="module"></script>
                             <div id="local"></div>
                         </div>
-                        <div class="save-file">
-                            此处是暂存文件
-                        </div>
+                        <!--                        <div class="save-file">-->
+                        <!--                            此处是暂存文件-->
+                        <!--                        </div>-->
                         <div class="edit-file">
-                            此处是未暂存文件
+                            <div class="col-sm-4">
+                                <h2>Tree</h2>
+                                <div id="treeview-checkable" class=""></div>
+                            </div>
+                            <div class="col-sm-4">
+                                <h2>Events</h2>
+                                <div id="checkable-output"></div>
+                            </div>
                         </div>
                         <div class="input-group input-group-sm">
                             <span class="input-group-addon" id="local_gitbash">Gitbash</span>
@@ -96,11 +105,18 @@
                             <script src="js/graph/graphOther.js" type="module"></script>
                             <div id="other"></div>
                         </div>
-                        <div class="save-file">
-                            此处是暂存文件
-                        </div>
+                        <!--                        <div class="save-file">-->
+                        <!--                            此处是暂存文件-->
+                        <!--                        </div>-->
                         <div class="edit-file">
-                            此处是未暂存文件
+                            <div class="col-sm-4">
+                                <h2>Tree</h2>
+                                <div id="treeview-checkable-other" class=""></div>
+                            </div>
+                            <div class="col-sm-4">
+                                <h2>Events</h2>
+                                <div id="checkable-output-other"></div>
+                            </div>
                         </div>
                         <div class="input-group input-group-sm">
                             <span class="input-group-addon" id="other_gitbash">Gitbash></span>
@@ -112,7 +128,9 @@
             </div>
         </div>
     </div>
-
-
+</div>
+<script src="js/filetreeview/bootstrap-treeview.js"></script>
+<script src="js/filetreeview/local-file-controller.js"></script>
+<script src="js/filetreeview/other-file-controller.js"></script>
 </body>
 </html>
