@@ -4,79 +4,163 @@ var myChart = echarts.init(document.getElementById('sunif'));
 
 // 指定图表的配置项和数据
 var option = {
-    /* title: {
-        text: '实时在线用户',
-
-        textStyle: {
-        fontWeight: 'normal',              //标题颜色
-            color: '#FFF'
-        },
-    }, */
-
-    tooltip: {
-        trigger: 'axis'
-    },
     legend: {
-        data:['微信认证','短信认证','临时放行'],
-        textStyle: {
-            fontWeight: 'normal',              //标题颜色
-            color: '#FFF'
-        }
+        // padding:[0,50,0,0],   //可设定图例[距上方距离，距右方距离，距下方距离，距左方距离]
     },
-    grid: {
-        left: '3%',
-        right: '4%',
-        bottom: '3%',
-        containLabel: true
-    },
+    grid: [{
+        left: '5%',
+        bottom: '10%',
+        top: '10%',
+        right: '5%'
+    }],
     xAxis: {
-        type: 'category',
-        boundaryGap: false,
-        data: ['16:10','16:15','16:20','16:25','16:30','16:35','16:40']
+        type: 'time',
+        show: false,
     },
     yAxis: {
-        type: 'value'
+        type: 'value',
+        min: 5,
+        max: 15,
+        splitNumber: 1,
+        show: false,
     },
-    series: [
+    series: [{
+        name: 'dev',
+        showAllSymbol: true,//标注所有数据点,
+        animation:true,//false: hover圆点不缩放 .true:hover圆点默认缩放
+        data:[
+            //辅线与基线的symbolSize是互斥的，不能同时为0或8
+            {
+                value:['2019-11-1 00:00:00', 10],
+                symbolSize: 0
+
+            },
+            {
+                value:['2019-11-1 12:00:00' , 15],
+                symbolSize: 0
+
+            },
+            {
+                value:['2019-11-2 00:00:00' , 15],
+                symbolSize: 8
+
+            },
+            {
+                value:['2019-11-3 00:00:00' , 15],
+                symbolSize: 0
+
+            },
+            {
+                value:['2019-11-3 12:00:00' , 15],
+                symbolSize: 0
+
+            },
+            {
+                value:['2019-11-4 00:00:00' , 10],
+                symbolSize: 0
+
+            },
+            // {
+            //     value:['2019-11-5 00:00:00' , 10],
+            //     symbolSize: 8
+
+            // },
+            // {
+            //     value:['2019-11-6 00:00:00' , 10],
+            //     symbolSize: 8
+
+            // },
+            {
+                value:['2019-11-9 00:00:00', 10],
+                symbolSize: 0
+
+            },
+            {
+                value:['2019-11-9 12:00:00' , 5],
+                symbolSize: 0
+
+            },
+            {
+                value:['2019-11-10 00:00:00' , 5],
+                symbolSize: 8
+
+            },
+            {
+                value:['2019-11-11 00:00:00' , 5],
+                symbolSize: 0
+
+            },
+            {
+                value:['2019-11-11 12:00:00' , 5],
+                symbolSize: 0
+
+            },
+            {
+                value:['2019-11-12 00:00:00' , 10],
+                symbolSize: 0
+
+            },
+        ],
+        type: 'line'
+    },
         {
-            name:'微信认证',
-            type:'line',
-            stack: '总量',
-            data:[120, 132, 101, 134, 90, 230, 210],
-            lineStyle: {
-                normal:{
-                    color:'#fff'
-                }
-            }
+            name: 'master',
+            symbolSize:8,//拐点大小
+            animation:true,//false: hover圆点不缩放 .true:hover圆点默认缩放
+            data:[
+                {
+                    value:['2019-11-1 00:00:00' , 10],symbolSize: 8
+
+                },
+                {
+                    value:['2019-11-2 00:00:00' , 10],symbolSize: 0
+
+                },
+                {
+                    value:['2019-11-3 00:00:00' , 10],symbolSize: 8
+
+                },
+                {
+                    value:['2019-11-4 00:00:00' , 10],symbolSize: 8
+
+                },
+                {
+                    value:['2019-11-5 00:00:00' , 10],symbolSize: 8
+
+                },
+                {
+                    value:['2019-11-6 00:00:00' , 10],symbolSize: 8
+
+                },
+                {
+                    value:['2019-11-7 00:00:00' , 10],symbolSize: 8
+
+                },
+                {
+                    value:['2019-11-8 00:00:00' , 10],symbolSize: 8
+
+                },{
+                    value:['2019-11-9 00:00:00' , 10],symbolSize: 8
+
+                },
+                {
+                    value:['2019-11-10 00:00:00' , 10],symbolSize: 0
+
+                },
+                {
+                    value:['2019-11-11 00:00:00' , 10],symbolSize: 8
+
+                },
+                {
+                    value:['2019-11-12 00:00:00' , 10],symbolSize: 8
+
+                },
+            ],
+            type: 'line'
         },
-        {
-            name:'短信认证',
-            type:'line',
-            stack: '总量',
-            data:[220, 182, 191, 234, 290, 330, 310],
-            lineStyle: {
-                normal:{
-                    color:'green'
-                }
-            }
-        },
-        {
-            name:'临时放行',
-            type:'line',
-            stack: '总量',
-            data:[150, 232, 201, 154, 190, 330, 410],
-            lineStyle: {
-                normal:{
-                    color:'yellow'
-                }
-            }
-        }
-    ],
-    textStyle: {
-        fontWeight: 'normal',              //标题颜色
-        color: '#FFF'
-    }
+    ]
 };
+
 
 // 自适应配置
 myChart.setOption(option);
