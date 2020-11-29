@@ -113,8 +113,8 @@ const height = document.getElementById('local').scrollHeight || 500;
 
 const graphRemote = new G6.TreeGraph({
     container: 'local',
-    width: 600,
-    height: 150,
+    width: 400,
+    height: 300,
     defaultNode: {
         type: 'card-node',
         size: [100, 40],
@@ -127,7 +127,7 @@ const graphRemote = new G6.TreeGraph({
     },
     layout: {
         type: 'indented',
-        direction: 'LR',//（左）LR。（中）RL。（右）H。
+        direction: 'H',//（左）LR。（中）RL。（右）H。
         dropCap: false,
         indent: 200,
         getHeight: () => {

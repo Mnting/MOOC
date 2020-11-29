@@ -8,12 +8,13 @@
 }
 
 .graph{
-    height:150px;
+    height:300px;
     border-style:solid;
     border-width:thin;
     border-radius:3px;
     margin:0px 5px 5px 5px;
     border-color:#C0C0C0;
+    overflow-y:auto;
 }
 
 .save-file{
@@ -26,11 +27,11 @@
 }
 
 .edit-file {
-    height:150px;
+    height:300px;
     border-style:solid;
     border-width:thin;
     border-radius:3px;
-    margin:5px;
+    margin:0px 5px 5px 5px;
     border-color:#C0C0C0;
     overflow-y:auto;
 }
